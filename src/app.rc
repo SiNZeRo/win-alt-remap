@@ -23,10 +23,10 @@ BEGIN
             VALUE "CompanyName", "Truman, Wentao TIAN\0"
             VALUE "FileDescription", "User-mode Win and Alt key remapper\0"
             VALUE "FileVersion", "0.1.0\0"
-            VALUE "InternalName", "MacAltWinSwap\0"
+            VALUE "InternalName", "WinAltRemap\0"
             VALUE "LegalCopyright", "Copyright (c) 2026 Truman, Wentao TIAN\0"
-            VALUE "OriginalFilename", "MacAltWinSwap.exe\0"
-            VALUE "ProductName", "MacAltWinSwap\0"
+            VALUE "OriginalFilename", "WinAltRemap.exe\0"
+            VALUE "ProductName", "WinAltRemap\0"
             VALUE "ProductVersion", "0.1.0\0"
             VALUE "Comments", "Licensed under the MIT License. No third-party image assets are included.\0"
         END

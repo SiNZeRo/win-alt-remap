@@ -7,9 +7,9 @@
 
 namespace {
 
-constexpr wchar_t kWindowClassName[] = L"MacAltWinSwapWindow";
-constexpr wchar_t kAppName[] = L"MacAltWinSwap";
-constexpr wchar_t kStartupValueName[] = L"MacAltWinSwap";
+constexpr wchar_t kWindowClassName[] = L"WinAltRemapWindow";
+constexpr wchar_t kAppName[] = L"WinAltRemap";
+constexpr wchar_t kStartupValueName[] = L"WinAltRemap";
 constexpr UINT kTrayIconId = 1;
 constexpr UINT kTrayCallbackMessage = WM_APP + 1;
 constexpr UINT kMenuToggleEnabled = 1001;
@@ -300,13 +300,13 @@ bool RegisterMainWindowClass(HINSTANCE instance) {
 } // namespace
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int) {
-    HANDLE singleInstanceMutex = CreateMutexW(nullptr, TRUE, L"Local\\MacAltWinSwapInstance");
+    HANDLE singleInstanceMutex = CreateMutexW(nullptr, TRUE, L"Local\\WinAltRemapInstance");
     if (singleInstanceMutex == nullptr) {
         return 1;
     }
 
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
-        MessageBoxW(nullptr, L"MacAltWinSwap is already running.", kAppName, MB_OK | MB_ICONINFORMATION);
+        MessageBoxW(nullptr, L"WinAltRemap is already running.", kAppName, MB_OK | MB_ICONINFORMATION);
         CloseHandle(singleInstanceMutex);
         return 0;
     }
