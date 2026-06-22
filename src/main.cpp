@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "resource.h"
+
 namespace {
 
 constexpr wchar_t kWindowClassName[] = L"MacAltWinSwapWindow";
@@ -18,6 +20,16 @@ HWND g_window = nullptr;
 HHOOK g_keyboardHook = nullptr;
 NOTIFYICONDATAW g_trayIcon{};
 bool g_enabled = true;
+
+HICON LoadAppIcon(HINSTANCE instance) {
+    return static_cast<HICON>(LoadImageW(
+        instance,
+        MAKEINTRESOURCEW(IDI_APP_ICON),
+        IMAGE_ICON,
+        0,
+        0,
+        LR_DEFAULTSIZE));
+}
 
 WORD ScanCodeFor(UINT virtualKey) {
     return static_cast<WORD>(MapVirtualKeyW(virtualKey, MAPVK_VK_TO_VSC_EX));
@@ -162,7 +174,10 @@ bool AddTrayIcon(HWND window) {
     g_trayIcon.uID = kTrayIconId;
     g_trayIcon.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
     g_trayIcon.uCallbackMessage = kTrayCallbackMessage;
-    g_trayIcon.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
+    g_trayIcon.hIcon = LoadAppIcon(GetModuleHandleW(nullptr));
+    if (g_trayIcon.hIcon == nullptr) {
+        g_trayIcon.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
+    }
 
     const std::wstring tooltip = std::wstring(kAppName) + L": Enabled";
     wcsncpy_s(g_trayIcon.szTip, tooltip.c_str(), _TRUNCATE);
@@ -268,7 +283,14 @@ bool RegisterMainWindowClass(HINSTANCE instance) {
     windowClass.cbSize = sizeof(windowClass);
     windowClass.lpfnWndProc = WindowProc;
     windowClass.hInstance = instance;
-    windowClass.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
+    windowClass.hIcon = LoadAppIcon(instance);
+    windowClass.hIconSm = static_cast<HICON>(LoadImageW(
+        instance,
+        MAKEINTRESOURCEW(IDI_APP_ICON),
+        IMAGE_ICON,
+        GetSystemMetrics(SM_CXSMICON),
+        GetSystemMetrics(SM_CYSMICON),
+        0));
     windowClass.hCursor = LoadCursorW(nullptr, IDC_ARROW);
     windowClass.lpszClassName = kWindowClassName;
 

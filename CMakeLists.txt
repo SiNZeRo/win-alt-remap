@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(MacAltWinSwap VERSION 0.1.0 LANGUAGES CXX)
+project(MacAltWinSwap VERSION 0.1.0 LANGUAGES CXX RC)
 
 add_executable(MacAltWinSwap WIN32
+    src/app.rc
     src/main.cpp
 )
 
