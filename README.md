@@ -22,6 +22,24 @@ cmake --build build --config Release
 build\Release\MacAltWinSwap.exe
 ```
 
+也可以在 WSL 里用 MinGW 交叉编译：
+
+```bash
+sudo apt-get install -y cmake mingw-w64
+cmake -S . -B build-mingw \
+  -DCMAKE_SYSTEM_NAME=Windows \
+  -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ \
+  -DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres \
+  -DCMAKE_BUILD_TYPE=Release
+cmake --build build-mingw --config Release
+```
+
+生成文件在：
+
+```text
+build-mingw/MacAltWinSwap.exe
+```
+
 ## 使用
 
 直接运行：
