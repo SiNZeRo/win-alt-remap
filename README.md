@@ -66,7 +66,7 @@ build-mingw/MacAltWinSwap.exe
 
 ## 版权和授权
 
-Copyright (c) 2026 Tian.
+Copyright (c) 2026 Truman, Wentao TIAN.
 
 代码和项目内生成的图标资产使用 MIT License，详见 [LICENSE](LICENSE)。
 
