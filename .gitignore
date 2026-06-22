@@ -1,4 +1,5 @@
 build*/
+AGENT.local.md
 .vs/
 out/
 *.user
